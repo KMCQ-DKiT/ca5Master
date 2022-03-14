@@ -1,3 +1,7 @@
+package MainApp;
+
+import DTOs.Player;
+
 import java.util.Comparator;
 public class PlayerNameTrophyComparator implements Comparator<Player> {
 
