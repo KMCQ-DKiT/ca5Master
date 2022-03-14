@@ -1,10 +1,10 @@
 import java.util.Objects;
 
 public class Player {
-    private String name;
-    private int age;
-    private String county;
-    private int trophies;
+    private final String name;
+    private final int age;
+    private final String county;
+    private final int trophies;
 
 
     Player(String name, String county, int age,int trophies){
