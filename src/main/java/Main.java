@@ -179,38 +179,38 @@ public class Main {
 
     public static void PriorityQueue()
     {
-        PriorityQueue<Player> queuePlayer = new PriorityQueue<>(new PlayerAgeComparator());
+        PriorityQueue<Player> priorityQueue = new PriorityQueue<>(new PlayerAgeComparator());
 
-        queuePlayer.add(new Player("Stephen Cluxton","Dublin",28,8));
-        queuePlayer.add(new Player("James McCarthy","Dublin",30,4));
-        queuePlayer.add(new Player("Bernard Brogan","Dublin",26,6));
-        queuePlayer.add(new Player("Colm Basquel", "Dublin",23,5));
-        queuePlayer.add(new Player("Cormac Costello","Dublin",20,4));
-        queuePlayer.add(new Player("Craig Lynch","Louth",27,1));
-        queuePlayer.add(new Player("Kevin Carr","Louth",28,0));
-        queuePlayer.add(new Player("Eoin O'Connor","Louth",31,0));
-        queuePlayer.add(new Player("Sam Mulroy","Louth",29,1));
-        queuePlayer.add(new Player("Decky Byrne","Louth",30,1));
+        priorityQueue.add(new Player("Stephen Cluxton","Dublin",28,8));
+        priorityQueue.add(new Player("James McCarthy","Dublin",30,4));
+        priorityQueue.add(new Player("Bernard Brogan","Dublin",26,6));
+        priorityQueue.add(new Player("Colm Basquel", "Dublin",23,5));
+        priorityQueue.add(new Player("Cormac Costello","Dublin",20,4));
+        priorityQueue.add(new Player("Craig Lynch","Louth",27,1));
+        priorityQueue.add(new Player("Kevin Carr","Louth",28,0));
+        priorityQueue.add(new Player("Eoin O'Connor","Louth",31,0));
+        priorityQueue.add(new Player("Sam Mulroy","Louth",29,1));
+        priorityQueue.add(new Player("Decky Byrne","Louth",30,1));
 
         System.out.println("Priority Queue by Age:");
-        for (Player s : queuePlayer){
+        for (Player s : priorityQueue){
             System.out.println(s);
         }
     }
     public static void TwoPriorityQueue(){
-        PriorityQueue<Player> queuePlayer = new PriorityQueue<>(new PlayerNameTrophyComparator());
-        queuePlayer.add(new Player("Stephen Cluxton","Dublin",28,8));
-        queuePlayer.add(new Player("James McCarthy","Dublin",30,4));
-        queuePlayer.add(new Player("Bernard Brogan","Dublin",26,6));
-        queuePlayer.add(new Player("Colm Basquel", "Dublin",23,5));
-        queuePlayer.add(new Player("Cormac Costello","Dublin",20,4));
-        queuePlayer.add(new Player("Craig Lynch","Louth",27,1));
-        queuePlayer.add(new Player("Kevin Carr","Louth",28,0));
-        queuePlayer.add(new Player("Eoin O'Connor","Louth",31,0));
-        queuePlayer.add(new Player("Sam Mulroy","Louth",29,1));
-        queuePlayer.add(new Player("Decky Byrne","Louth",30,1));
+        PriorityQueue<Player> priorityQueue = new PriorityQueue<>(new PlayerNameTrophyComparator());
+        priorityQueue.add(new Player("Stephen Cluxton","Dublin",28,8));
+        priorityQueue.add(new Player("James McCarthy","Dublin",30,4));
+        priorityQueue.add(new Player("Bernard Brogan","Dublin",26,6));
+        priorityQueue.add(new Player("Colm Basquel", "Dublin",23,5));
+        priorityQueue.add(new Player("Cormac Costello","Dublin",20,4));
+        priorityQueue.add(new Player("Craig Lynch","Louth",27,1));
+        priorityQueue.add(new Player("Kevin Carr","Louth",28,0));
+        priorityQueue.add(new Player("Eoin O'Connor","Louth",31,0));
+        priorityQueue.add(new Player("Sam Mulroy","Louth",29,1));
+        priorityQueue.add(new Player("Decky Byrne","Louth",30,1));
         System.out.println("Priority Queue With Name And Trophy:");
-        for (Player s : queuePlayer){
+        for (Player s : priorityQueue){
             System.out.println(s);
         }
     }
