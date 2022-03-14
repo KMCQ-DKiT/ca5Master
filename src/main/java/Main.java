@@ -121,7 +121,7 @@ public class Main {
         playerMap.put("L2", new Player("Kevin Carr","Louth",28,0));
         playerMap.put("L3", new Player("Eoin O'Connor","Louth",31,0));
         playerMap.put("L4", new Player("Sam Mulroy","Louth",29,1));
-        playerMap.put("L5",new Player("Decky Byrne","Louth",30,1));
+        playerMap.put("L5", new Player("Decky Byrne","Louth",30,1));
 
         System.out.println("Displaying from HashMap:");
         Collection<Player> players = playerMap.values();
@@ -134,26 +134,26 @@ public class Main {
 
     public static void findFromHash()
     {
-        Map<String, Player> playerMap = new HashMap<>();
-        playerMap.put("D1", new Player("Stephen Cluxton","Dublin",28,8));
-        playerMap.put("D2", new Player("James McCarthy","Dublin",30,4));
-        playerMap.put("D3", new Player("Bernard Brogan","Dublin",26,6));
-        playerMap.put("D4", new Player("Colm Basquel", "Dublin",23,5));
-        playerMap.put("D5", new Player("Cormac Costello","Dublin",20,4));
-        playerMap.put("L1", new Player("Craig Lynch","Louth",27,1));
-        playerMap.put("L2", new Player("Kevin Carr","Louth",28,0));
-        playerMap.put("L3", new Player("Eoin O'Connor","Louth",31,0));
-        playerMap.put("L4", new Player("Sam Mulroy","Louth",29,1));
-        playerMap.put("L5",new Player("Decky Byrne","Louth",30,1));
+        Map<String, Player> playerHash = new HashMap<>();
+        playerHash.put("D1", new Player("Stephen Cluxton","Dublin",28,8));
+        playerHash.put("D2", new Player("James McCarthy","Dublin",30,4));
+        playerHash.put("D3", new Player("Bernard Brogan","Dublin",26,6));
+        playerHash.put("D4", new Player("Colm Basquel", "Dublin",23,5));
+        playerHash.put("D5", new Player("Cormac Costello","Dublin",20,4));
+        playerHash.put("L1", new Player("Craig Lynch","Louth",27,1));
+        playerHash.put("L2", new Player("Kevin Carr","Louth",28,0));
+        playerHash.put("L3", new Player("Eoin O'Connor","Louth",31,0));
+        playerHash.put("L4", new Player("Sam Mulroy","Louth",29,1));
+        playerHash.put("L5",new Player("Decky Byrne","Louth",30,1));
 
         System.out.println("\n");
         System.out.println("Enter Initials of County and Number of Player ( Dublin = `D` + Number = 1  = `D1`) :");
         Scanner keyboard = new Scanner(System.in);
         String userInput = keyboard.nextLine().toUpperCase(Locale.ROOT);
-        if (playerMap.get(userInput) == null){
+        if (playerHash.get(userInput) == null){
             System.out.println("Object was not found,Invalid Key");
         }else {
-            System.out.println(playerMap.get(userInput));
+            System.out.println(playerHash.get(userInput));
         }
     }
     public static void displayTree()
