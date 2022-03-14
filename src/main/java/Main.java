@@ -13,7 +13,7 @@ public class Main {
     {
         try
         {
-            displayMainMenu();        // User Interface - Menu
+            displayMainMenu();
         } catch (IOException e)
         {
             e.printStackTrace();
