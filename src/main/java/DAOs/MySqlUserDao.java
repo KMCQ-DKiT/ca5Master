@@ -123,6 +123,56 @@ public class MySqlUserDao extends MySqlDao implements UserDaoInterface
         return player;
 
     }
+
+
+
+    public void addPlayer(int id ,String name, int age, String county,int trophy) throws DaoException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Player player = null;
+        try {
+            connection = this.getConnection();
+
+            String query = "INSERT INTO PLAYER VALUES (null,?, ?, ?,?)";
+
+            // Try-with-Resources style
+
+            preparedStatement = connection.prepareStatement(query);
+
+
+            System.out.println("Connected to the database");
+            System.out.println("Building a PreparedStatement to insert a new row in database.");
+
+//          preparedStatement = conn.prepareStatement("INSERT INTO test.Customers VALUES (null, ?, ?, ?)";
+//          Parameters are indexed starting with 1, and correspond to order of the question marks above.
+//          1 corresponds to first question mark, 2 to the second one, and so on...
+//          As the first field is an Auto-Increment field in the database, we specify a null value for it.
+
+            preparedStatement.setString(1, name);
+            preparedStatement.setInt(2, age);
+            preparedStatement.setString(3, county);
+            preparedStatement.setInt(4, trophy);
+
+            preparedStatement.executeUpdate();
+
+            {
+                try {
+                    if (resultSet != null) {
+                        resultSet.close();
+                    }
+                    if (preparedStatement != null) {
+                        preparedStatement.close();
+                    }
+                    if (connection != null) {
+                        freeConnection(connection);
+                    }
+                } catch (SQLException e) {
+                    throw new DaoException("addPlayer() " + e.getMessage());
+                }
+            }} catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }}
 }
 
 

@@ -11,6 +11,8 @@ public interface UserDaoInterface
 
     public Player findPlayerByID(int userID) throws DaoException;
 
+    public void addPlayer(int id ,String name, int age, String county,int trophy) throws DaoException;
+
 
 }
 

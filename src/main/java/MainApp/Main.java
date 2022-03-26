@@ -41,8 +41,9 @@ public class Main {
                 + "5. PriorityQueue\n"
                 + "6. Display 2 Priority\n"
                 + "7. Display from mySQL\n"
-                + "8. Exit\n"
-                + "Enter Option [1,8]";
+                + "8. Add to Database MySQL\n"
+                + "9. Exit\n"
+                + "Enter Option [1,9]";
 
         final int ARRAYLIST = 1;
         final int HASHMAP = 2;
@@ -51,7 +52,8 @@ public class Main {
         final int PRIORITYQUEUE = 5;
         final int TWOPRIORITYQUEUE = 6;
         final int MYSQL = 7;
-        final int EXIT = 8;
+        final int ADDTODATA = 8;
+        final int EXIT = 9;
 
         Scanner keyboard = new Scanner(System.in);
         int option = 0;
@@ -82,6 +84,9 @@ public class Main {
                     case MYSQL:
                         System.out.println("MySql Chosen");
                         mySql();
+                        break;
+                    case ADDTODATA:
+                        addPlayer();
                         break;
                     case EXIT:
                         break;
@@ -259,10 +264,21 @@ public class Main {
         } catch (DaoException e) {
             e.printStackTrace();
         }
+    }
+    public static void addPlayer()throws DaoException{
+        UserDaoInterface IUserDao = new MySqlUserDao();
+        Scanner k = new Scanner(System.in);
+        int id = 0;
+        System.out.println("Enter Name of Player");
+        String name = k.nextLine();
+        System.out.println("Enter County of Player");
+        String county = k.nextLine();
+        System.out.println("Enter Age of Player");
+        int age = k.nextInt();
+        System.out.println("Enter Trophy amount of Player");
+        int trophy =k.nextInt();
 
-
-
-
+        IUserDao.addPlayer(id,name,age,county,trophy);
     }
 }
 
