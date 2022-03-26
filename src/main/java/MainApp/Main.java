@@ -12,6 +12,7 @@ import java.util.*;
 
 
 public class Main {
+    ArrayList<Player> playerList = new ArrayList<>();
 
     public static void main(String[] args) {
         Main app = new Main();
@@ -41,8 +42,14 @@ public class Main {
                 + "5. PriorityQueue\n"
                 + "6. Display 2 Priority\n"
                 + "7. Display from mySQL\n"
-                + "8. Exit\n"
-                + "Enter Option [1,8]";
+                + "8. Find By ID MySQl\n"
+                + "9. Add data to xampp\n"
+                + "10. Delete From Xampp\n"
+                + "11. Filter By Age Through Xampp\n"
+                + "12. GsonString Of Data\n"
+                + "13. GsonStringFilter of Data\n"
+                + "14. Exit\n"
+                + "Enter Option [1,14]";
 
         final int ARRAYLIST = 1;
         final int HASHMAP = 2;
@@ -51,7 +58,13 @@ public class Main {
         final int PRIORITYQUEUE = 5;
         final int TWOPRIORITYQUEUE = 6;
         final int MYSQL = 7;
-        final int EXIT = 8;
+        final int FINDBYIDSQL = 8;
+        final int ADDTODATA = 9;
+        final int DELETEFROMDATA = 10;
+        final int FILTERBYAGE = 11;
+        final int GSONSTRING = 12;
+        final int GSONSTRINGFILTER = 13;
+        final int EXIT = 14;
 
         Scanner keyboard = new Scanner(System.in);
         int option = 0;
@@ -63,6 +76,7 @@ public class Main {
                 switch (option) {
                     case ARRAYLIST:
                         displayArray();
+                        gsonString();
                         break;
                     case HASHMAP:
                         displayHash();
@@ -80,8 +94,25 @@ public class Main {
                         TwoPriorityQueue();
                         break;
                     case MYSQL:
-                        System.out.println("MySql Chosen");
                         mySql();
+                        break;
+                    case FINDBYIDSQL:
+                        findByIdMySQL();
+                        break;
+                    case ADDTODATA:
+                        addPlayer();
+                        break;
+                    case DELETEFROMDATA:
+                        deletePlayer();
+                        break;
+                    case FILTERBYAGE:
+                        filterByTrophy();
+                        break;
+                    case GSONSTRING:
+                        gsonString();
+                        break;
+                    case GSONSTRINGFILTER:
+                        findByIDJson();
                         break;
                     case EXIT:
                         break;
@@ -189,7 +220,7 @@ public class Main {
     }
 
     public static void PriorityQueue() {
-        PriorityQueue<Player> priorityQueue = new PriorityQueue<>(new PlayerAgeComparator());
+        PriorityQueue<Player> priorityQueue = new PriorityQueue<>(new PlayerTrophiesComparator());
 
         priorityQueue.add(new Player(1,"Stephen Cluxton", "Dublin", 28, 8));
         priorityQueue.add(new Player(2,"James McCarthy", "Dublin", 30, 4));
@@ -227,7 +258,6 @@ public class Main {
     }
     public static void mySql() throws DaoException {
         UserDaoInterface IUserDao = new MySqlUserDao();
-
         try {
             System.out.println("\nCall findAllPlayers()");
             List<Player> players = IUserDao.findAllPlayers();
@@ -238,10 +268,17 @@ public class Main {
                 for (Player p : players)
                     System.out.println("Player: " + p.toString());
             }
-
-
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void findByIdMySQL()throws DaoException{
+        UserDaoInterface IUserDao = new MySqlUserDao();
+        Scanner k = new Scanner(System.in);
+        try {
             System.out.println("\nCall: findPlayerByID()");
-            int userID = 5;
+            System.out.println("Enter ID You Wish To Find: ");
+            int userID = k.nextInt();
             Player player = IUserDao.findPlayerByID(userID);
 
             if (player != null)
@@ -249,21 +286,82 @@ public class Main {
             else
                 System.out.println("Player with that ID not found");
 
-            userID = 6;
-
-            player = IUserDao.findPlayerByID(userID);
-            if (player != null)
-                System.out.println("Player By ID: " + userID + " was found: " + player);
-            else
-                System.out.println("Player By ID: " + userID + " is not valid.");
         } catch (DaoException e) {
             e.printStackTrace();
         }
-
-
-
-
     }
+    public static void addPlayer()throws DaoException{
+        UserDaoInterface IUserDao = new MySqlUserDao();
+        Scanner k = new Scanner(System.in);
+        int id = 0;
+        System.out.println("Enter Name of Player");
+        String name = k.nextLine();
+        System.out.println("Enter County of Player");
+        String county = k.nextLine();
+        System.out.println("Enter Age of Player");
+        int age = k.nextInt();
+        System.out.println("Enter Trophy amount of Player");
+        int trophy =k.nextInt();
+        IUserDao.addPlayer(id,name,age,county,trophy);
+    }
+    public static void deletePlayer()throws DaoException{
+        UserDaoInterface IUserDao = new MySqlUserDao();
+        Scanner k = new Scanner(System.in);
+        System.out.println("Select player by ID to delete: ");
+        int id = k.nextInt();
+        System.out.println("You Chose to Delete");
+        System.out.println(IUserDao.findPlayerByID(id));
+        IUserDao.DeletePlayerByID(id);
+    }
+
+    public static void filterByTrophy() throws DaoException {
+        Scanner k = new Scanner(System.in);
+        UserDaoInterface IUserDao = new MySqlUserDao();
+        System.out.print("Enter Trophy amount: ");
+        List<Player> players = IUserDao.findAllPlayers();
+        int trophies = k.nextInt();
+        k.nextLine();
+        PlayerTrophiesComparator playerTrophiesComparator = new PlayerTrophiesComparator();
+        players = IUserDao.findAllPlayersGoalsFilter(trophies,playerTrophiesComparator);
+        System.out.println("Players with " + trophies + "+ trophies");
+        for (Player p : players) {
+            System.out.println(p.toString());
+        }
+    }
+    public static void gsonString()throws DaoException{
+        UserDaoInterface IUserDao = new MySqlUserDao();
+        try {
+            System.out.println("\nCall findAllPlayers()");
+            String players = IUserDao.findAllPlayersJson();
+            if (players.isEmpty())
+                System.out.println("There are no Players");
+            else {
+                System.out.println(players);
+            }
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void findByIDJson() throws DaoException {
+        UserDaoInterface IUserDao = new MySqlUserDao();
+        Scanner k = new Scanner(System.in);
+        try {
+            System.out.println("\nCall: findPlayerByID()");
+            System.out.println("Enter ID You Wish To Find: ");
+            int userID = k.nextInt();
+            String player = IUserDao.findPlayerByIDGson(userID);
+
+            if (player != null)
+                System.out.println("Player found: " + player);
+            else
+                System.out.println("Player with that ID not found");
+
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 

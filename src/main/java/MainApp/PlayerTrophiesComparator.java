@@ -3,7 +3,7 @@ package MainApp;
 import DTOs.Player;
 
 import java.util.Comparator;
-public class PlayerAgeComparator implements Comparator<Player>
+public class PlayerTrophiesComparator implements Comparator<Player>
 {
 
 
