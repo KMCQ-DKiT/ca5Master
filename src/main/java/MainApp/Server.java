@@ -1,34 +1,5 @@
 package MainApp;
 
-/**
- * SERVER  - MULTITHREADED                                         March 2021
- * <p>
- * Server accepts client connections, creates a ClientHandler to handle the
- * Client communication, creates a socket and passes the socket to the handler,
- * runs the handler in a separate Thread.
- * <p>
- * <p>
- * The handler reads requests from clients, and sends replies to clients, all in
- * accordance with the rules of the protocol. as specified in
- * "ClientServerBasic" sample program
- * <p>
- * The following PROTOCOL is implemented:
- * <p>
- * If ( the Server receives the request "Time", from a Client ) then : the
- * server will send back the current time
- * <p>
- * If ( the Server receives the request "Echo message", from a Client ) then :
- * the server will send back the message
- * <p>
- * If ( the Server receives the request it does not recognize ) then : the
- * server will send back the message "Sorry, I don't understand"
- * <p>
- * This is an example of a simple protocol, where the server's response is based
- * on the client's request.
- *
- *  Each client is handled by a ClientHandler running in a separate worker Thread
- *  which allows the Server to continually listen for and handle multiple clients
- */
 
 
 import Comparators.PlayerTrophiesComparator;
@@ -44,7 +15,6 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.time.LocalTime;
 import java.util.List;
 public class Server
 {
@@ -162,25 +132,25 @@ public class Server
                         IUserDao.DeletePlayerByID(id);
                         Player x = IUserDao.findPlayerByID(id);
                         if(x!= null){
-                            socketWriter.println("player not deleted");
+                            socketWriter.println("Not deleted");
                         }
                         else
                         {
-                            socketWriter.println("player deleted");
+                            socketWriter.println("Player deleted");
                         }
 
                     }
-                    else if (message.startsWith("FilterByGoals"))
+                    else if (message.startsWith("FilterByTrophies"))
                     {
                         String[] tokens = message.split(" ");
-                        int goals = Integer.parseInt(tokens[1]);
-                        List pList = IUserDao.findallPlayersTrophies(goals,playerTrophiesComparator);
+                        int trophies = Integer.parseInt(tokens[1]);
+                        List pList = IUserDao.findallPlayersTrophies(trophies,playerTrophiesComparator);
                         if(pList.size() > 0){
                             socketWriter.println(pList);
                         }
                         else
                         {
-                            socketWriter.println("No players have up to " + goals + " goals");
+                            socketWriter.println("No players have up to " + trophies + " trophies");
                         }
 
                     }
