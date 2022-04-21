@@ -1,4 +1,4 @@
-package MainApp;
+package Comparators;
 
 import DTOs.Player;
 

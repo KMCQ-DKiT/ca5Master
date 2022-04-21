@@ -2,7 +2,7 @@ package DAOs;
 
 import DTOs.Player;
 import Exceptions.DaoException;
-import MainApp.PlayerTrophiesComparator;
+import Comparators.PlayerTrophiesComparator;
 import com.google.gson.Gson;
 
 import java.sql.Connection;
@@ -331,7 +331,7 @@ public class MySqlUserDao extends MySqlDao implements UserDaoInterface
     }
 
     @Override
-    public List<Player> findAllPlayersGoalsFilter(int g, PlayerTrophiesComparator playerTrophiesComparator) throws DaoException
+    public List<Player> findallPlayersTrophies(int g, PlayerTrophiesComparator playerTrophiesComparator) throws DaoException
     {
         Connection connection = null;
         PreparedStatement ps = null;
