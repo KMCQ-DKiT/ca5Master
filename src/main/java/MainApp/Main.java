@@ -1,5 +1,7 @@
 package MainApp;
 
+import Comparators.PlayerNameTrophyComparator;
+import Comparators.PlayerTrophiesComparator;
 import DAOs.MySqlUserDao;
 import DAOs.UserDaoInterface;
 import DTOs.Player;
@@ -49,7 +51,7 @@ public class Main {
                 + "12. GsonString Of Data\n"
                 + "13. GsonStringFilter of Data\n"
                 + "14. Exit\n"
-                + "Enter Option [1,14]";
+                + "Enter Option [1-14]";
 
         final int ARRAYLIST = 1;
         final int HASHMAP = 2;
@@ -322,7 +324,7 @@ public class Main {
         int trophies = k.nextInt();
         k.nextLine();
         PlayerTrophiesComparator playerTrophiesComparator = new PlayerTrophiesComparator();
-        players = IUserDao.findAllPlayersGoalsFilter(trophies,playerTrophiesComparator);
+        players = IUserDao.findallPlayersTrophies(trophies,playerTrophiesComparator);
         System.out.println("Players with " + trophies + "+ trophies");
         for (Player p : players) {
             System.out.println(p.toString());
